@@ -1,0 +1,21 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: todo-app-virtualservice
+spec:
+  hosts:
+    - "*"
+
+  gateways:
+    - istio-system/ingressgateway
+
+  http:
+    - match:
+        - uri:
+            prefix: /
+
+      route:
+        - destination:
+            host: todo-service
+            port:
+              number: 80
